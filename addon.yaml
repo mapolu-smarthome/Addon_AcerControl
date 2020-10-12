@@ -1,0 +1,9 @@
+########################################################################
+# Addon Information
+########################################################################
+enabled: true
+id: AcerControl
+name: Acer Display Monitoring And Cotrol
+file: AcerControl.dll
+minApiVersion: 2.2.0
+maxApiVersion: 
