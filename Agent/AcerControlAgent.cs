@@ -1,5 +1,5 @@
-﻿using IOTLink.Addon.AcerControl.AcerDisplay;
-using IOTLink.Addon.AcerControl.Common;
+﻿using IOTLink.Addon.AcerControl.Common;
+using IOTLink.Addon.AcerControl.Display;
 using IOTLinkAPI.Addons;
 using IOTLinkAPI.Helpers;
 using IOTLinkAPI.Platform.Events;
@@ -8,7 +8,7 @@ namespace IOTLink.Addon.AcerControl.Agent
 {
     public class AcerControlAgent : AgentAddon
     {
-        private Display _display;
+        private DisplayItem _display;
 
         public override void Init(IAddonManager addonManager)
         {
@@ -17,7 +17,7 @@ namespace IOTLink.Addon.AcerControl.Agent
             OnConfigReloadHandler += OnConfigReload;
             OnAgentRequestHandler += OnAgentRequest;
 
-            _display = new Display();
+            _display = new DisplayItem();
             _display.Init();
         }
 

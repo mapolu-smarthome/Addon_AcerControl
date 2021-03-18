@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace IOTLink.Addon.AcerControl.AcerDisplay
+namespace IOTLink.Addon.AcerControl.Display
 {
 	public class MCCSNative
 	{

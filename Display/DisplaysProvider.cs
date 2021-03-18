@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.Win32;
 
-namespace IOTLink.Addon.AcerControl.AcerDisplay
+namespace IOTLink.Addon.AcerControl.Display
 {
-	public class DisplayInfoProvider
+	public class DisplaysProvider
 	{
 		public struct DEVMODE
 		{
@@ -310,7 +310,7 @@ namespace IOTLink.Addon.AcerControl.AcerDisplay
 			catch (Exception)
 			{
 			}
-		}
+        }
 
 		public static string IntToHex(int value)
 		{
