@@ -1,6 +1,6 @@
-# Addon_AcerControl
+# IOTLink Addon - AcerControl
 
-This addon controls Acer products via MQTT.
+This is an IOTLink addon for controlling Acer products via MQTT.
 
 Currently supported products: 
  * Monitors (uses Acer Display Widget API)
