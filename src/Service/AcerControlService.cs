@@ -4,6 +4,7 @@ using IOTLink.Addon.AcerControl.Common;
 using IOTLinkAPI.Addons;
 using IOTLinkAPI.Helpers;
 using IOTLinkAPI.Platform.Events.MQTT;
+using Newtonsoft.Json;
 
 namespace IOTLink.Addon.AcerControl.Service
 {
@@ -18,23 +19,20 @@ namespace IOTLink.Addon.AcerControl.Service
 
         private void OnSetBrightnessMessage(object sender, MQTTMessageEventEventArgs e)
         {
-            string data = e.Message.GetPayload();
+            var payload = e.Message.GetPayload();
             
-            LoggerHelper.Verbose("OnSetBrightnessMessage: Message received: {0}", data);
+            LoggerHelper.Verbose("OnSetBrightnessMessage: Payload received: {0}", payload);
             
-            if (string.IsNullOrWhiteSpace(data))
-                return;
-
-            if (!double.TryParse(data, out double brightnessLevel) || brightnessLevel < 0 || brightnessLevel > 100)
+            var data = JsonConvert.DeserializeObject<SetBrightnessRequest>(payload);
+            
+            if (data.Brightness is < 0 or > 100)
                 LoggerHelper.Error("OnSetBrightnessMessage failure: Invalid data. Expected: 0-100");
-
-            LoggerHelper.Verbose("OnSetBrightnessMessage: Message received: {0}", data);
 
             try
             {
                 dynamic addonData = new ExpandoObject();
                 addonData.requestType = AddonRequestType.DISPLAY_SET_BRIGHTNESS;
-                addonData.requestData = (int)brightnessLevel;
+                addonData.requestData = data;
 
                 GetManager().SendAgentRequest(this, addonData);
             }

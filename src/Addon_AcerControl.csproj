@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<OutputType>Library</OutputType>
 		<AssemblyName>AcerControl</AssemblyName>
 		<RootNamespace>IOTLink.Addon.AcerControl</RootNamespace>
 		<TargetFrameworks>net472</TargetFrameworks>
@@ -9,8 +8,6 @@
 		<Platforms>AnyCPU;x86</Platforms>
 		<LangVersion>latest</LangVersion>
 		<OutputPath>bin\$(Configuration)</OutputPath>
-		<DebugType>none</DebugType>
-		<DebugSymbols>false</DebugSymbols>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -23,11 +20,11 @@
 		<Reference Include="Microsoft.CSharp" />
 	</ItemGroup>
 
-	<Target Name="CopyDependencies" AfterTargets="PostBuildEvent">
-		<ItemGroup>
-			<OutputFolder Include="bin\$(Configuration)" />
-		</ItemGroup>
+<!--	<Target Name="CopyDependencies" AfterTargets="PostBuildEvent">-->
+<!--		<ItemGroup>-->
+<!--			<OutputFolder Include="bin\$(Configuration)" />-->
+<!--		</ItemGroup>-->
 
-		<Copy SourceFiles="%(OutputFolder.Identity)\$(AssemblyName).dll;Display\Monitor_MCCS_API.dll;addon.yaml" DestinationFolder="%(OutputFolder.Identity)\$(AssemblyName)" />
-	</Target>
+<!--		<Copy SourceFiles="%(OutputFolder.Identity)\$(AssemblyName).dll;Display\Monitor_MCCS_API.dll;addon.yaml" DestinationFolder="%(OutputFolder.Identity)\$(AssemblyName)" />-->
+<!--	</Target>-->
 </Project>

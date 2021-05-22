@@ -8,7 +8,7 @@ namespace IOTLink.Addon.AcerControl.Agent
 {
     public class AcerControlAgent : AgentAddon
     {
-        private DisplayItem _display;
+        private DisplayController _displayController;
 
         public override void Init(IAddonManager addonManager)
         {
@@ -17,8 +17,8 @@ namespace IOTLink.Addon.AcerControl.Agent
             OnConfigReloadHandler += OnConfigReload;
             OnAgentRequestHandler += OnAgentRequest;
 
-            _display = new DisplayItem();
-            _display.Init();
+            _displayController = new DisplayController();
+            _displayController.Init();
         }
 
         private void OnConfigReload(object sender, ConfigReloadEventArgs e)
@@ -34,19 +34,19 @@ namespace IOTLink.Addon.AcerControl.Agent
             switch (requestType)
             {
                 case AddonRequestType.DISPLAY_SET_BRIGHTNESS:
-                    SetBrightness(e.Data.requestData);
+                    SetBrightnessRequest request = e.Data.requestData.ToObject<SetBrightnessRequest>();
+                    SetBrightness(request);
                     break;
 
                 default: break;
             }
         }
 
-        private void SetBrightness(dynamic data)
+        private void SetBrightness(SetBrightnessRequest request)
         {
-            LoggerHelper.Verbose("AcerControlAgent::SetBrightness - {0}", data);
-            int level = data.ToObject<int>();
+            LoggerHelper.Verbose("AcerControlAgent::SetBrightness - b: {0} idx: {1}", request.Brightness, request.DisplayIndex);
 
-            _display.SetBrightness(level);
+            _displayController.SetBrightness(request.DisplayIndex, (int)request.Brightness);
         }
     }
 }
